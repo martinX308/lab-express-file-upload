@@ -7,7 +7,12 @@ const upload = multer({ dest: './public/uploads/' });
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
-  res.render('index', { title: 'Express' });
+  Picture.find({}, (err, pictures) => {
+    if (err) {
+      return next(err);
+    }
+    res.render('index', {pictures});
+  });
 });
 
 // Route to upload from project base path
